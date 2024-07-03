@@ -28,9 +28,9 @@ const ConfigurationsDetailsScreen = ({ route, navigation }) => {
       const uri = `http://192.168.1.6:3000`;
       const uriComplete = uri + '/controller/config/update';
       await axios.put(uriComplete, config);
-      Alert.alert('Success', 'Configuration updated successfully');
+      Alert.alert('Sucesso', 'Configuração atualizada');
     } catch (error) {
-      console.error('Error updating config:', error);
+      console.error('Error updating:', error);
     }
   };
 
