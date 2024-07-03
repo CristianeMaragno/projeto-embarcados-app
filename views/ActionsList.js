@@ -24,9 +24,10 @@ const ActionsListScreen = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
-      <Text style={styles.title}>Feeding Time: {item.feedingTime}</Text>
-      <Text style={styles.subtitle}>Feeder ID: {item.feederId}</Text>
-      <Text style={styles.subtitle}>Sensor Reading: {item.sensorReading}</Text>
+      <Text style={styles.title}>Horário: {item.feedingTime}</Text>
+      <Text style={styles.subtitle}>ID do alimentador: {item.feederId}</Text>
+      <Text style={styles.subtitle}>Leitura do sensor: {item.sensorReading}</Text>
+      <Text style={styles.subtitle}>Situação: {item.message}</Text>
     </View>
   );
 
