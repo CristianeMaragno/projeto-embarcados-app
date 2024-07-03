@@ -1,6 +1,7 @@
 // FeederConfig.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert } from 'react-native';
+import { Button} from 'react-native-paper';
 import axios from 'axios';
 
 const ConfigurationsDetailsScreen = ({ route, navigation }) => {
@@ -13,7 +14,9 @@ const ConfigurationsDetailsScreen = ({ route, navigation }) => {
 
   const fetchConfig = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/controller/config/${feederId}`);
+      const uri = `http://192.168.1.6:3000`;
+      const uriComplete = uri + `/controller/config/${feederId}`;
+      const response = await axios.get(uriComplete);
       setConfig(response.data.config);
     } catch (error) {
       console.error('Error fetching config:', error);
@@ -22,7 +25,9 @@ const ConfigurationsDetailsScreen = ({ route, navigation }) => {
 
   const updateConfig = async () => {
     try {
-      await axios.put('http://localhost:3000/controller/config/update', config);
+      const uri = `http://192.168.1.6:3000`;
+      const uriComplete = uri + '/controller/config/update';
+      await axios.put(uriComplete, config);
       Alert.alert('Success', 'Configuration updated successfully');
     } catch (error) {
       console.error('Error updating config:', error);
@@ -45,7 +50,10 @@ const ConfigurationsDetailsScreen = ({ route, navigation }) => {
         onChangeText={(text) => setConfig({ ...config, timeInterval: Number(text) })}
         keyboardType="numeric"
       />
-      <Button title="Atualizar config" onPress={updateConfig} />
+      <Button icon="pen" style={styles.button} mode="contained" 
+				onPress={updateConfig}>
+				Atualizar config
+			</Button>
     </View>
   );
 };
@@ -65,6 +73,10 @@ const styles = StyleSheet.create({
     padding: 8,
     marginBottom: 16,
   },
+  button: {
+		width: '100%',
+		marginVertical: 10,
+	}
 });
 
 export default ConfigurationsDetailsScreen;

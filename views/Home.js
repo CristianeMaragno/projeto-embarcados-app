@@ -5,7 +5,7 @@ export default function HomeScreen({ navigation }) {
 
 	return(
 		<View style={styles.container}>
-			<Button icon="wrench" style={styles.button} mode="contained" onPress={() => navigation.navigate('FeedersList')}>
+			<Button icon="eye" style={styles.button} mode="contained" onPress={() => navigation.navigate('FeedersList')}>
 				Alimentadores
 			</Button>
 

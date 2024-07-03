@@ -14,7 +14,9 @@ export default function FeedersList({ navigation }) {
   
 	const fetchFeeders = async () => {
 	  try {
-		const response = await axios.get('http://localhost:3000/controller/feeder/list');
+		const uri = `http://192.168.1.6:3000`;
+      	const uriComplete = uri + '/controller/feeder/list';
+		const response = await axios.get(uriComplete);
 		setFeeders(response.data.feeders);
 	  } catch (error) {
 		console.error('Error fetching feeders:', error);
@@ -25,15 +27,14 @@ export default function FeedersList({ navigation }) {
 		<View style={styles.itemContainer}>
 		  	<Text style={styles.title}>{item.name}</Text>
 		  	<Text style={styles.subtitle}>{item.location}</Text>
-		  	<Button
-				title="Config"
-				onPress={() => navigation.navigate('ConfigurationsDetails', { feederId: item.id })}
-			/>
+
+			<Button icon="wrench" style={styles.button} mode="contained" 
+				onPress={() => navigation.navigate('ConfigurationsDetails', { feederId: item.id })}>
+				Configurações
+			</Button>
 		</View>
 	);
 
-	//On click, update
-	//Create new feede
 	return(
 		<View style={styles.container}>
 			<FlatList
@@ -63,4 +64,8 @@ const styles = StyleSheet.create({
 	  fontSize: 14,
 	  color: '#666',
 	},
+	button: {
+		width: '100%',
+		marginVertical: 10,
+	}
 });

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 
+
 const ActionsListScreen = () => {
   const [actions, setActions] = useState([]);
 
@@ -12,7 +13,9 @@ const ActionsListScreen = () => {
 
   const fetchActions = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/logging/list');
+      const uri = `http://192.168.1.6:3000`;
+      const uriComplete = uri + '/logging/list';
+      const response = await axios.get(uriComplete);
       setActions(response.data.actions);
     } catch (error) {
       console.error('Error fetching actions:', error);
@@ -49,3 +52,5 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
   }
 });
+
+export default ActionsListScreen;
